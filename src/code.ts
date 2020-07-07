@@ -1,3 +1,6 @@
-import * as Rx from "rxjs/Observable";
+import { Observable } from "rxjs/Observable";
+import { observable } from "rxjs";
 
-console.log(Rx);
+var obs = Observable.create((observer: any) => observer.next("WoW"));
+
+obs.subscribe((x: any) => console.log(x));
