@@ -6,7 +6,7 @@ RUN apk --no-cache add git zsh
 ENV PATH="${PATH}:/home/node/frontend/node_modules/.bin"
 
 USER node
-WORKDIR /home/node/frontend
+WORKDIR /home/node/app
 
 ## ZSH / OhMyZsh
 COPY --chown=node:node zsh/install-zsh.sh /home/node/install-zsh.sh

@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "rxjs": "^6.6.0",
+    "rxjs-compat": "^6.6.0",
     "ts-loader": "^7.0.5",
     "typescript": "^3.9.6",
     "webpack": "^4.43.0",
