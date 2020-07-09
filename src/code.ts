@@ -1,16 +1,19 @@
-import { Observable, merge, observable } from "rxjs";
-
+import { Observable, merge } from "rxjs";
+import { map } from "rxjs/operators";
 var a = new Observable((observer: any) => {
-  observer.next("Hey Guys");
+  observer.next("Should be");
 });
 
 var b = new Observable((observer: any) => {
-  observer.next("How is it going");
+  observer.next("Uppercase");
 });
 
 var newObs = merge(a, b);
 
-newObs.subscribe((x: any) => addItem(x));
+var mappedObs = newObs.pipe(map((val: any) => val.toUpperCase()));
+
+console.log(mappedObs);
+mappedObs.subscribe((x: any) => addItem(x));
 
 function addItem(val: any) {
   var node = document.createElement("li");
