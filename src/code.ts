@@ -1,21 +1,16 @@
-import { ReplaySubject } from "rxjs";
+import { Observable, merge, observable } from "rxjs";
 
-var ReplaySubject2 = new ReplaySubject(30, 500);
+var a = new Observable((observer: any) => {
+  observer.next("Hey Guys");
+});
 
-ReplaySubject2.subscribe(
-  (data) => addItem("Replay subject 2, observer1: " + data),
-  (err) => addItem(err),
-  () => addItem("Replay subject 2, observer 1 completed")
-);
+var b = new Observable((observer: any) => {
+  observer.next("How is it going");
+});
 
-var i = 1;
-var int = setInterval(() => ReplaySubject2.next(i++), 100);
+var newObs = merge(a, b);
 
-setTimeout(() => {
-  var obs2 = ReplaySubject2.subscribe((data) =>
-    addItem("Replay subject 2, observer2: " + data)
-  );
-}, 500);
+newObs.subscribe((x: any) => addItem(x));
 
 function addItem(val: any) {
   var node = document.createElement("li");
