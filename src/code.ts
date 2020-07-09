@@ -1,19 +1,27 @@
-import { Observable, merge } from "rxjs";
-import { map } from "rxjs/operators";
-var a = new Observable((observer: any) => {
-  observer.next("Should be");
-});
+import { from } from "rxjs";
+import { pluck } from "rxjs/operators";
 
-var b = new Observable((observer: any) => {
-  observer.next("Uppercase");
-});
+var obs = from([
+  {
+    name: "Giovanni",
+    age: 44,
+  },
+  {
+    name: "Stefania",
+    age: 43,
+  },
+  {
+    name: "Letizia",
+    age: 8,
+  },
+  {
+    name: "Riccardo",
+    age: 6,
+  },
+]);
 
-var newObs = merge(a, b);
-
-var mappedObs = newObs.pipe(map((val: any) => val.toUpperCase()));
-
-console.log(mappedObs);
-mappedObs.subscribe((x: any) => addItem(x));
+obs.pipe(pluck("age")).subscribe((x: any) => addItem("Ages: " + x));
+obs.pipe(pluck("name")).subscribe((x: any) => addItem("Name: " + x));
 
 function addItem(val: any) {
   var node = document.createElement("li");
